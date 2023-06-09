@@ -3,11 +3,11 @@ import React from 'react'
 
 type CategoriesProps = {
   categoryId: number;
-  onCategoryHandler: (i:number) => void;
+  onCategoryHandler: (i: number) => void;
 };
 
 
-const categories:string[] = [ 
+const categories: string[] = [
   "All",
   "Meaty",
   "Vegetarian",
@@ -16,15 +16,15 @@ const categories:string[] = [
 ]
 
 
-const Categories:React.FC<CategoriesProps> = React.memo(( {categoryId, onCategoryHandler} ) => {
-  
+const Categories: React.FC<CategoriesProps> = React.memo(({ categoryId, onCategoryHandler }) => {
+
   return (
     <div className="categories">
       <ul >
         {
-          categories.map((category, i) => 
-            <li onClick={() => onCategoryHandler(i)} className={ categoryId == i ? "active" : "" }  key={ i }>
-              { category }
+          categories.map((category, i) =>
+            <li onClick={() => onCategoryHandler(i)} className={categoryId == i ? "active" : ""} key={i}>
+              {category}
             </li>
           )
         }

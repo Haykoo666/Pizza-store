@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './scss/app.scss'
-import Header from './components/Header';
 import Home from './pages/Home';
 import MainLayout from './layouts/MainLayout';
 
@@ -19,35 +18,36 @@ const App = () => {
     <Routes>
       <Route path='/' element={<MainLayout />}>
 
-        <Route 
-          path="" 
-          element={ <Home /> } 
+        <Route
+          path=""
+          element={<Home />}
         />
-        <Route 
-          path="/cart" 
+        <Route
+          path="/cart"
           element={
             <Suspense fallback={<div>loading...</div>}>
               <Cart />
             </Suspense>
-          } 
+          }
+          errorElement={<div>12</div>}
         />
-        <Route 
-          path="/pizza/:id" 
+        <Route
+          path="/pizza/:id"
           element={
             <Suspense fallback={<div>loading...</div>}>
               <SinglePizza />
             </Suspense>
-          } 
+          }
         />
-        <Route 
-          path="*" 
+        <Route
+          path="*"
           element={
             <Suspense fallback={<div>loading...</div>}>
               <NotFound />
             </Suspense>
-          } 
+          }
         />
-        
+
       </Route>
     </Routes>
   )

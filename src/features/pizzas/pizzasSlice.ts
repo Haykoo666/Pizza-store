@@ -22,14 +22,14 @@ export const PizzasSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchPizzas.pending, (state) => {
       console.log("pending");
-      
+
       state.status = Status.LOADING
       state.items = [];
     });
 
     builder.addCase(fetchPizzas.fulfilled, (state, action: PayloadAction<PizzaBlockProps[]>) => {
       console.log("success");
-      
+
       state.items = action.payload;
       // state.status = Status.SUCCESS;
       state.status = !action.payload.length ? Status.ERROR : Status.SUCCESS;

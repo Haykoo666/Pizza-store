@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { getCartFromLS } from './../../utils/getCartFromLS';
 import { calcTotalPrice } from './../../utils/calcTotalPrice';
 import { CartItem, CartSliceState } from './types';
@@ -7,7 +8,7 @@ import { CartItem, CartSliceState } from './types';
 
 const { items, totalPrice } = getCartFromLS();
 
-const initialState:CartSliceState = {
+const initialState: CartSliceState = {
   totalPrice,
   items
 }
@@ -17,18 +18,18 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addPizza: (state, action: PayloadAction<CartItem>) => {
-      const findItem = state.items.find((obj:CartItem) => obj.id === action.payload.id);
+      const findItem = state.items.find((item: CartItem) => item.id === action.payload.id);
       //! todo move to ==> utils
-      findItem ? findItem.count ++ : state.items.push({...action.payload, count: 1});
-      state.totalPrice = state.items.reduce((sum:number, obj:any) => sum+= obj.price * obj.count, 0);
+      findItem ? findItem.count++ : state.items.push({ ...action.payload, count: 1 });
+      state.totalPrice = state.items.reduce((sum: number, obj: any) => sum += obj.price * obj.count, 0);
 
     },
     removePizza: (state, action: PayloadAction<string>) => {
-      if(window.confirm("Are you sure ?")){
-        state.items = state.items.filter((obj:CartItem) => obj.id !== action.payload);
+      if (window.confirm("Are you sure ?")) {
+        state.items = state.items.filter((item: CartItem) => item.id !== action.payload);
         state.totalPrice = calcTotalPrice(items)
         let cartFromLS = JSON.parse(localStorage.getItem('cart') || "");
-        cartFromLS = cartFromLS.filter((obj:CartItem) => obj.id !== action.payload);
+        cartFromLS = cartFromLS.filter((obj: CartItem) => obj.id !== action.payload);
         localStorage.setItem("cart", JSON.stringify(cartFromLS))
       }
     },
@@ -40,15 +41,15 @@ const cartSlice = createSlice({
       }
     },
     incrementPizzaCount: (state, action: PayloadAction<string>) => {
-      const findItem = state.items.find((obj:any) => obj.id === action.payload);
+      const findItem = state.items.find((obj: CartItem) => obj.id === action.payload);
 
-      if(findItem) findItem.count++;
+      if (findItem) findItem.count++;
       state.totalPrice = calcTotalPrice(state.items);
     },
     decrementPizzaCount: (state, action: PayloadAction<string>) => {
-      const findItem = state.items.find((obj:any) => obj.id === action.payload);
+      const findItem = state.items.find((obj: CartItem) => obj.id === action.payload);
 
-      if(findItem) findItem.count--;
+      if (findItem) findItem.count--;
       state.totalPrice = calcTotalPrice(state.items);
 
     },

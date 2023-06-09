@@ -1,4 +1,3 @@
-import React from 'react'
 import NotFoundSkeleton from '../components/NotFoundSkeleton'
 
 

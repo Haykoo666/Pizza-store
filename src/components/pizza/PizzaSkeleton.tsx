@@ -1,6 +1,7 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { FC, useState } from 'react';
+
 import { addPizza } from '../../features/cart/cartSlice';
 import { selectCartItemById } from '../../features/cart/selectors';
 import { CartItem } from '../../features/cart/types';
@@ -18,13 +19,13 @@ export type PizzaBlockProps = {
   // category?: number;
 };
 
-const PizzaSkeleton:React.FC<PizzaBlockProps> = ( {id, title, price, imgURL, sizes, types} ) => {
+const PizzaSkeleton: FC<PizzaBlockProps> = ({ id, title, price, imgURL, sizes, types }) => {
 
   const typeNames = ["thin", "traditional"];
-  
-  const [activeSize, setActiveSize] = React.useState<number>(0);
-  const [activeType, setActiveType] = React.useState<number>(0);
-  
+
+  const [activeSize, setActiveSize] = useState<number>(0);
+  const [activeType, setActiveType] = useState<number>(0);
+
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id))
 
@@ -32,7 +33,7 @@ const PizzaSkeleton:React.FC<PizzaBlockProps> = ( {id, title, price, imgURL, siz
 
 
   const onClickAdd = () => {
-    
+
     const item: CartItem = {
       id,
       title,
@@ -47,24 +48,24 @@ const PizzaSkeleton:React.FC<PizzaBlockProps> = ( {id, title, price, imgURL, siz
   return (
     <div className="pizza-block">
       <Link to={`/pizza/${id}`}>
-        <img 
+        <img
           className="pizza-block__image"
-          src={ imgURL }
-          alt="Pizza" 
+          src={imgURL}
+          alt="Pizza"
           loading='lazy'
         />
-        <h4 className="pizza-block__title">{ title }</h4>
+        <h4 className="pizza-block__title">{title}</h4>
       </Link>
       <div className="pizza-block__selector">
         <ul>
           {
-            types?.map((typeId, i) => 
+            types?.map((typeId, i) =>
               <li key={i}
                 onClick={() => setActiveType(i)}
                 className={activeType == i ? "active" : ""}
-              > 
-                {typeNames[typeId]} 
-              </li>  
+              >
+                {typeNames[typeId]}
+              </li>
             )
           }
         </ul>
@@ -82,7 +83,7 @@ const PizzaSkeleton:React.FC<PizzaBlockProps> = ( {id, title, price, imgURL, siz
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от { price } ֏</div>
+        <div className="pizza-block__price"> {price} ֏</div>
         <button className="button button--outline button--add" onClick={onClickAdd}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

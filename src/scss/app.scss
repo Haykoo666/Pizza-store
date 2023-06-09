@@ -489,3 +489,10 @@ body {
 .d-flex {
   display: flex;
 }
+
+.error{
+  background-color: #efacac;
+  border: double 4px darkred;
+  color: darkred;  
+  padding: 1em; 
+}

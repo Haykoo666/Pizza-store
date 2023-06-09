@@ -1,8 +1,8 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './CartEmpty.module.scss'
 
+import styles from './CartEmpty.module.scss'
 import cartEmptyImg from '../../assets/img/empty-cart.png';
+
 
 export const CartEmpty: React.FC = () => (
   <div className={`${styles["cart--empty"]} cart`}>

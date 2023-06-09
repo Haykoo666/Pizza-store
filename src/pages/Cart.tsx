@@ -1,20 +1,20 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import CartItem from '../components/Cart/CartItem';
 import { clearCartPizzas } from '../features/cart/cartSlice';
-import {  CartItem as CartItemType } from '../features/cart/types';
 import { CartEmpty } from '../components/Cart/CartEmpty';
 import { selectCart } from '../features/cart/selectors';
+import { CartItem as CartItemType } from '../features/cart/types';
 
 
-const Cart:React.FC = () => {
+const Cart: React.FC = () => {
 
   const dispatch = useDispatch()
-  const {items:cartItems, totalPrice} = useSelector(selectCart);
+  const { items: cartItems, totalPrice } = useSelector(selectCart);
 
-  const totalItemsCount = cartItems.reduce((sum:number, item:CartItemType) => sum += item.count, 0 )
-  
+  const totalItemsCount = cartItems.reduce((sum: number, item: CartItemType) => sum += item.count, 0)
+
   if (!cartItems.length) {
     return <CartEmpty />
   }
@@ -53,18 +53,18 @@ const Cart:React.FC = () => {
         </button>
       </div>
       {
-        cartItems.length > 0 && cartItems.map((item:any) => 
+        cartItems.length > 0 && cartItems.map((item: any) =>
           <CartItem
             key={item.id}
             {...item}
           />
-        ) 
+        )
       }
       <div className="cart__bottom">
         <div className="cart__bottom-details">
-          <span> All pizza: <b> {totalItemsCount}шт.</b> </span>
+          <span> All pizza: <b> {totalItemsCount} pieces</b> </span>
           <div className='line'></div>
-          <span> Total price: <b>{totalPrice} ₽</b> </span>
+          <span> Total price: <b>{totalPrice} ֏</b> </span>
         </div>
         <div className="cart__bottom-buttons">
           <Link to="/" className="button button--outline button--add go-back-btn">

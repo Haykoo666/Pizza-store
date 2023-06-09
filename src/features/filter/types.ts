@@ -24,6 +24,6 @@ export type SearchPizzaParams = {
 
 export type SortItem = {
   name: string;
-  sortProperty:  SortPropertyEnum;
+  sortProperty: SortPropertyEnum;
 };
 

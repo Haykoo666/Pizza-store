@@ -1,45 +1,46 @@
 // Imports
 import React from 'react'
 import { useDispatch } from 'react-redux';
+
 import { changeSortType } from '../features/filter/filterSlice';
-import { SortPropertyEnum, SortItem  } from '../features/filter/types';
+import { SortPropertyEnum, SortItem } from '../features/filter/types';
 // -------------------------------------------------------------------------------------------
 //! types
 
-type SortPopupProps ={
+type SortPopupProps = {
   selectedSortType: SortItem;
 };
 
 
 // ---------------------------------------------------------------------------------------------
 export const sortList: SortItem[] = [{
-    name: 'popularity (DESC)',
-    sortProperty: SortPropertyEnum.RATING_DESC
-  },
-  {
-    name: 'popularity (ASC)',
-    sortProperty: SortPropertyEnum.RATING_ASC
-  },
-  {
-    name: 'price (DESC)',
-    sortProperty: SortPropertyEnum.PRICE_DESC
-  },
-  {
-    name: 'price (ASC)',
-    sortProperty: SortPropertyEnum.PRICE_ASC
-    
-  },
-  {
-    name: 'alphabet (DESC)',
-    sortProperty: SortPropertyEnum.TITLE_DESC
-  },
-  {
-    name: 'alphabet (ASC)',
-    sortProperty: SortPropertyEnum.TITLE_ASC
-  },
+  name: 'popularity (DESC)',
+  sortProperty: SortPropertyEnum.RATING_DESC
+},
+{
+  name: 'popularity (ASC)',
+  sortProperty: SortPropertyEnum.RATING_ASC
+},
+{
+  name: 'price (DESC)',
+  sortProperty: SortPropertyEnum.PRICE_DESC
+},
+{
+  name: 'price (ASC)',
+  sortProperty: SortPropertyEnum.PRICE_ASC
+
+},
+{
+  name: 'alphabet (DESC)',
+  sortProperty: SortPropertyEnum.TITLE_DESC
+},
+{
+  name: 'alphabet (ASC)',
+  sortProperty: SortPropertyEnum.TITLE_ASC
+},
 ];
 
-const SortPopup:React.FC<SortPopupProps> = React.memo(({selectedSortType}) => {
+const SortPopup: React.FC<SortPopupProps> = React.memo(({ selectedSortType }) => {
 
   const dispatch = useDispatch();
 
@@ -69,7 +70,7 @@ const SortPopup:React.FC<SortPopupProps> = React.memo(({selectedSortType}) => {
   }, [sortRef]);
 
   return (
-    <div className = "sort" ref={sortRef}>
+    <div className="sort" ref={sortRef}>
       <div className="sort__label">
         <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -77,29 +78,29 @@ const SortPopup:React.FC<SortPopupProps> = React.memo(({selectedSortType}) => {
             fill="#2C2C2C" />
         </svg>
         <b>Sort by:</b>
-        <span onClick={()=> setIsOpen(!isOpen)}>
+        <span onClick={() => setIsOpen(!isOpen)}>
           {selectedSortType?.name}
         </span>
       </div>
-    {
-      isOpen && (
-      <div className="sort__popup ">
-        <ul>
-          {
-            sortList.map((typeObj, i) => 
-              <li 
-                key={ i } 
-                onClick={()=> chooseSortType(typeObj)}
-                className={selectedSortType.name == typeObj.name ? "active" : ""}
-              >
-                { typeObj.name }
-              </li>
-            )
-          }
-        </ul>
-      </div>
-      )
-    }
+      {
+        isOpen && (
+          <div className="sort__popup ">
+            <ul>
+              {
+                sortList.map((typeObj, i) =>
+                  <li
+                    key={i}
+                    onClick={() => chooseSortType(typeObj)}
+                    className={selectedSortType.name == typeObj.name ? "active" : ""}
+                  >
+                    {typeObj.name}
+                  </li>
+                )
+              }
+            </ul>
+          </div>
+        )
+      }
 
     </div>
   )
